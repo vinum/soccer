@@ -56,7 +56,24 @@ router.get('/speakers/:speakerid', function(req, res) {
   });
 });
 
+router.get('/video', function(req, res) {
+  var myArtwork = [];
+  var myArtists = [];
+  myArtists = appdata.speakers;
 
+   appdata.speakers.forEach(function(item) {
+    if (item.shortname == req.params.speakerid) {
+      myArtists.push(item);
+      myArtwork = myArtwork.concat(item.artwork);
+    }
+  });
+  res.render('video', {
+    title: 'video',
+    artwork: myArtwork,
+    artists: myArtists,
+    page: 'video'
+  });
+});
 
 
 module.exports = router;
